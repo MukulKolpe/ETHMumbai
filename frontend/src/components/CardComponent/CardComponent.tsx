@@ -61,7 +61,7 @@ const CardComponent = ({ address }) => {
   const [isLendLoanHash, setisLendLoanHash] = useState("");
   const [lenderFlag, setLenderFlag] = useState(false);
   const [nftId, setNftId] = useState(-1);
-  const nftContractAddress = "0x9D384c534ddDBA0574941004778b36dEa6B619e7";
+  const nftContractAddress = "0xa672510ccDdBa29202559b88840Bc04629B79c95";
 
   const { address: userAddress } = useAccount();
 
@@ -326,7 +326,7 @@ const CardComponent = ({ address }) => {
       const nftId = id.toString();
 
       const nftcontract = new ethers.Contract(
-        "0x9D384c534ddDBA0574941004778b36dEa6B619e7",
+        "0xa672510ccDdBa29202559b88840Bc04629B79c95",
         Nftabi,
         signer
       );

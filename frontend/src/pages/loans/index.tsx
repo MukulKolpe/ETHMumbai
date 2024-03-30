@@ -27,7 +27,7 @@ export default function Loans() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
-        "0xA6Fa7cE717b478FcC2A7A68d48DD8509A8095AE1",
+        "0xBBeD959419253B1f1967141Ab6483b1472703476",
         LoanManager,
         signer
       );
