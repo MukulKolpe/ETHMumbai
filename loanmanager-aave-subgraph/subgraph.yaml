@@ -1,0 +1,29 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LoanManager
+    network: sepolia
+    source:
+      address: "0xBBeD959419253B1f1967141Ab6483b1472703476"
+      abi: LoanManager
+      startBlock: 5590298
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ActiveLoansSet
+        - LoanCreated
+      abis:
+        - name: LoanManager
+          file: ./abis/LoanManager.json
+      eventHandlers:
+        - event: ActiveLoansSet(indexed address,bool)
+          handler: handleActiveLoansSet
+        - event: LoanCreated(indexed address,address)
+          handler: handleLoanCreated
+      file: ./src/loan-manager.ts

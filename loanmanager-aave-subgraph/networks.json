@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "LoanManager": {
+      "address": "0xBBeD959419253B1f1967141Ab6483b1472703476",
+      "startBlock": 5590298
+    }
+  }
+}
