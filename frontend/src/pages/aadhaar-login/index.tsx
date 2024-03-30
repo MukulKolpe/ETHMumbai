@@ -26,7 +26,8 @@ const AadharLogin = () => {
   const getIdentityParams = async () => {
     let proofObj = JSON.parse(latestProof);
     console.log(proofObj);
-    const PackedGroth16Proof = packGroth16Proof(proofObj.proof.groth16);
+    console.log(proofObj.proof.groth16Proof);
+    const PackedGroth16Proof = packGroth16Proof(proofObj.proof.groth16Proof);
     console.log(PackedGroth16Proof);
   };
 

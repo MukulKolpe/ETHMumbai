@@ -25,7 +25,7 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { ExternalLinkIcon, ChatIcon } from "@chakra-ui/icons";
 import {
   Modal,
   ModalOverlay,
@@ -42,6 +42,7 @@ import LoansAbi from "../../utils/Loans.json";
 import DAIAbi from "../../utils/DAI.json";
 import DebtTokenAbi from "../../utils/DebtToken.json";
 import { ethers } from "ethers";
+import { useRouter } from "next/router";
 
 const CardComponent = ({ address }) => {
   const [imageURI, setImageURI] = useState("");
@@ -61,6 +62,7 @@ const CardComponent = ({ address }) => {
   const [isLendLoanHash, setisLendLoanHash] = useState("");
   const [lenderFlag, setLenderFlag] = useState(false);
   const [nftId, setNftId] = useState(-1);
+  const router = useRouter();
   const nftContractAddress = "0xa672510ccDdBa29202559b88840Bc04629B79c95";
 
   const { address: userAddress } = useAccount();
@@ -342,13 +344,13 @@ const CardComponent = ({ address }) => {
 
   return (
     <div>
-      <Center py={6}>
+      <Center py={6} margin={5}>
         <Box
           h={"full"}
           w={"full"}
           bg={useColorModeValue("white", "gray.800")}
           boxShadow={"2xl"}
-          rounded={"md"}
+          rounded={"lg"}
           overflow={"hidden"}
         >
           <Image
@@ -388,7 +390,7 @@ const CardComponent = ({ address }) => {
             <Flex>
               <Button
                 w={"full"}
-                mt={8}
+                mt={4}
                 bg={useColorModeValue("#151f21", "gray.900")}
                 color={"white"}
                 rounded={"md"}
@@ -419,24 +421,45 @@ const CardComponent = ({ address }) => {
                 </Button>
               )}
             </Flex>
-            <Button
-              w={"full"}
-              mt={8}
-              bg={useColorModeValue("#151f21", "gray.900")}
-              color={"white"}
-              rounded={"md"}
-              _hover={{
-                transform: "translateY(-2px)",
-                boxShadow: "lg",
-              }}
-            >
-              <Link
-                href={`https://sepolia.etherscan.io/nft/${nftContractAddress}/${nftId}`}
-                isExternal
+            <Flex margin="10px">
+              <Button
+                w={"full"}
+                mt={4}
+                mr={2}
+                bg={useColorModeValue("#151f21", "gray.900")}
+                color={"white"}
+                rounded={"md"}
+                _hover={{
+                  transform: "translateY(-2px)",
+                  boxShadow: "lg",
+                }}
               >
-                View NFT <ExternalLinkIcon mx="2px" />
-              </Link>
-            </Button>
+                <Link
+                  href={`https://sepolia.etherscan.io/nft/${nftContractAddress}/${nftId}`}
+                  isExternal
+                >
+                  View NFT <ExternalLinkIcon mx="2px" />
+                </Link>
+              </Button>
+              <Button
+                w={"full"}
+                mt={4}
+                ml={2}
+                bg={useColorModeValue("#151f21", "gray.900")}
+                color={"white"}
+                rounded={"md"}
+                _hover={{
+                  transform: "translateY(-2px)",
+                  boxShadow: "lg",
+                }}
+                onClick={() => router.push(`/nft/${nftId}`)}
+              >
+                <Link isExternal>
+                  Comment <ChatIcon mx="2px" />
+                </Link>
+              </Button>
+            </Flex>
+
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
               <ModalContent>
