@@ -28,8 +28,15 @@ import Image from "next/image";
 // import { ethers } from "ethers";
 import { Link } from "@chakra-ui/next-js";
 import { useAccount } from "wagmi";
+import {
+  AnonAadhaarProof,
+  LogInWithAnonAadhaar,
+  useAnonAadhaar,
+  useProver,
+} from "@anon-aadhaar/react";
 
 export default function Navbar() {
+  const [anonAadhaar] = useAnonAadhaar();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const account = useAccount();
 
@@ -71,6 +78,19 @@ export default function Navbar() {
             <div style={{ display: "flex" }}>
               {account.isConnected && (
                 <>
+                  <HStack
+                    as={"nav"}
+                    spacing={4}
+                    display={{ base: "none", md: "flex" }}
+                    marginRight={4}
+                  >
+                    <Link href="/aadhaar-login">
+                      <Button w="full" variant="ghost">
+                        Aadhaar Login
+                      </Button>
+                    </Link>
+                  </HStack>
+
                   <HStack
                     as={"nav"}
                     spacing={4}
@@ -139,6 +159,13 @@ export default function Navbar() {
           <Box pb={4} display={{ md: "none" }}>
             {account.isConnected && (
               <>
+                <Stack as={"nav"} spacing={4}>
+                  <Link href="/aadhaar-login">
+                    <Button w="full" variant="ghost">
+                      Aadhaar Login
+                    </Button>
+                  </Link>
+                </Stack>
                 <Stack as={"nav"} spacing={4}>
                   <Link href="/mint-nft">
                     <Button w="full" variant="ghost">

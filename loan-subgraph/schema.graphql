@@ -1,0 +1,9 @@
+type LoanPaid @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  amountPaid: BigInt! # uint256
+  remainingAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

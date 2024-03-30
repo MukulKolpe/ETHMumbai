@@ -7,8 +7,16 @@ NFT.sol :-
 
 OnChainVerifier.sol :- 0xf702449AD852Bf44A5BAc29a426c40641De5A193
 
-Subgraph studio link : -
+Subgraph studio links : -
+
+LoanManager Contract -
 
 ```
 https://api.studio.thegraph.com/proxy/69401/loanmanager-aave/v0.0.1
+```
+
+Loans Contract -
+
+```
+https://api.studio.thegraph.com/query/69401/loan/v0.0.1
 ```
