@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "Loans": {
+      "address": "0x2E538B759925bC10a1998fda48B4e604aE428743",
+      "startBlock": 5591173
+    }
+  }
+}
