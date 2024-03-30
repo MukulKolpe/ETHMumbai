@@ -41,33 +41,43 @@ export default function App({ Component, pageProps }: AppProps) {
     setReady(true);
   }, []);
   return (
-    <WagmiProvider>
-      <ChakraProvider theme={theme}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "100vh",
-          }}
-        >
-          <Navbar />
-          <ApolloProvider client={apolloClient}>
-            {ready ? (
-              <AnonAadhaarProvider
-                _useTestAadhaar={useTestAadhaar}
-                _appName="Anon Aadhaar"
-              >
-                <Component
-                  {...pageProps}
-                  setUseTestAadhaar={setUseTestAadhaar}
-                  useTestAadhaar={useTestAadhaar}
-                />
-              </AnonAadhaarProvider>
-            ) : null}
-          </ApolloProvider>
-          <Footer />
-        </div>
-      </ChakraProvider>
-    </WagmiProvider>
+    <>
+      <Head>
+        <title>AaveAnonify</title>
+        <meta
+          name="description"
+          content="Inspiration to Investment:
+Embrace the Journey!"
+        />
+      </Head>
+      <WagmiProvider>
+        <ChakraProvider theme={theme}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }}
+          >
+            <Navbar />
+            <ApolloProvider client={apolloClient}>
+              {ready ? (
+                <AnonAadhaarProvider
+                  _useTestAadhaar={useTestAadhaar}
+                  _appName="Anon Aadhaar"
+                >
+                  <Component
+                    {...pageProps}
+                    setUseTestAadhaar={setUseTestAadhaar}
+                    useTestAadhaar={useTestAadhaar}
+                  />
+                </AnonAadhaarProvider>
+              ) : null}
+            </ApolloProvider>
+            <Footer />
+          </div>
+        </ChakraProvider>
+      </WagmiProvider>
+    </>
   );
 }

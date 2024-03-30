@@ -58,7 +58,7 @@ export default function Home({ setUseTestAadhaar, useTestAadhaar }: HomeProps) {
           <Heading
             fontWeight={600}
             fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight={"110%"}
+            lineHeight={"100%"}
           >
             Inspiration to Investment: <br />
             <Text as={"span"} color={"#1E88E5"}>
