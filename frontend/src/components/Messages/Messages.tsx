@@ -27,7 +27,7 @@ const Messages = ({ messages }) => {
               my="1"
               p="3"
             >
-              <Text>{item.text}</Text>
+              <Text>{item.comment_body}</Text>
             </Flex>
           </Flex>
         );
