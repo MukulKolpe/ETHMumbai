@@ -9,6 +9,8 @@ const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
 import WagmiProvider from "../utils/wagmiprovider";
 import Head from "next/head";
 import Footer from "@/components/Footer";
+import React, { useEffect, useState } from "react";
+import { AnonAadhaarProvider } from "@anon-aadhaar/react";
 
 const colors = {
   brand: {
@@ -32,6 +34,12 @@ const config = {
 const theme = extendTheme({ colors, config });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [ready, setReady] = useState<boolean>(false);
+  const [useTestAadhaar, setUseTestAadhaar] = useState<boolean>(false);
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
   return (
     <WagmiProvider>
       <ChakraProvider theme={theme}>
@@ -44,7 +52,18 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <Navbar />
           <ApolloProvider client={apolloClient}>
-            <Component {...pageProps} />
+            {ready ? (
+              <AnonAadhaarProvider
+                _useTestAadhaar={useTestAadhaar}
+                _appName="Anon Aadhaar"
+              >
+                <Component
+                  {...pageProps}
+                  setUseTestAadhaar={setUseTestAadhaar}
+                  useTestAadhaar={useTestAadhaar}
+                />
+              </AnonAadhaarProvider>
+            ) : null}
           </ApolloProvider>
           <Footer />
         </div>
