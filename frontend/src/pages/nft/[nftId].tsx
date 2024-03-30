@@ -24,13 +24,70 @@ import { MdLocalShipping } from "react-icons/md";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Nftabi from "../../utils/NFT.json";
+import OnChainVerifierAbi from "../../utils/OnChainVerifierAbi.json";
 import Messages from "../../components/Messages/Messages";
 import MessageFooter from "../../components/MessageFooter/MessageFooter";
 import { ethers } from "ethers";
+import {
+  AnonAadhaarProof,
+  LogInWithAnonAadhaar,
+  useAnonAadhaar,
+  useProver,
+} from "@anon-aadhaar/react";
+import { AnonAadhaarCore, packGroth16Proof } from "@anon-aadhaar/core";
 
 const IndividualNFT = () => {
   const router = useRouter();
   const [imageURI, setImageURI] = useState("");
+  const [anonAadhaar] = useAnonAadhaar();
+  const [, latestProof] = useProver();
+  const [verifiedUser, setVerifiedUser] = useState(false);
+  const [messages, setMessages] = useState([
+    { text: "Hi, My Name is HoneyChat" },
+    { text: "Hey there" },
+    { text: "Myself Ferin Patel" },
+    {
+      text: "Nice to meet you. You can send me message and i'll reply you with same message.",
+    },
+  ]);
+  const [inputMessage, setInputMessage] = useState("");
+
+  const getIdentityParams = async () => {
+    let proofObj = JSON.parse(latestProof);
+    console.log(proofObj);
+    console.log(proofObj.proof.groth16Proof);
+    const PackedGroth16Proof = packGroth16Proof(proofObj.proof.groth16Proof);
+    console.log(PackedGroth16Proof);
+  };
+
+  const checkVerification = async () => {
+    if (anonAadhaar.status === "logged-in") {
+      console.log("The user has connected aadhar");
+      console.log(latestProof);
+    }
+  };
+
+  const checkOnchainVerification = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const onchainverifierContract = new ethers.Contract(
+      "0x278BD277EFBFD4647AaaCDa36A330759C1D7640f",
+      OnChainVerifierAbi,
+      signer
+    );
+    console.log(onchainverifierContract);
+    const tempNullifier = JSON.parse(latestProof);
+    console.log(tempNullifier);
+    const resp = await onchainverifierContract.checkNullifier(
+      BigInt(tempNullifier.proof.nullifier)
+    );
+    console.log(resp);
+    if (resp) {
+      setVerifiedUser(true);
+      return true;
+    }
+    return false;
+  };
 
   const onLoad = async () => {
     const { nftId } = router.query;
@@ -43,35 +100,56 @@ const IndividualNFT = () => {
         Nftabi,
         signer
       );
-
       const tokenURI = await nftcontract.tokenURI(nftId);
       setImageURI(tokenURI);
       console.log(imageURI);
+      checkVerification();
+      const res = await fetch(`/api/get-critics`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nftId: nftId,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      setMessages(data);
     }
   };
 
   useEffect(() => {
-    onLoad();
-  }, []);
+    if (router) {
+      onLoad();
+    }
+  }, [router]);
 
-  const [messages, setMessages] = useState([
-    { text: "Hi, My Name is HoneyChat" },
-    { text: "Hey there" },
-    { text: "Myself Ferin Patel" },
-    {
-      text: "Nice to meet you. You can send me message and i'll reply you with same message.",
-    },
-  ]);
-  const [inputMessage, setInputMessage] = useState("");
-
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
+    const { nftId } = router.query;
     if (!inputMessage.trim().length) {
       return;
     }
     const data = inputMessage;
-
-    setMessages((old) => [...old, { text: data }]);
+    const res1 = await checkOnchainVerification();
+    if (!res1) {
+      console.log("Identity not verified");
+      return;
+    }
+    setMessages((old) => [...old, { comment_body: data }]);
     setInputMessage("");
+    const res = await fetch(`/api/send-critics`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nftId: nftId,
+        commentBody: data,
+      }),
+    });
+    const dataapi = await res.json();
+    console.log(dataapi);
   };
 
   return (
