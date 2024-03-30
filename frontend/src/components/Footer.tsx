@@ -11,6 +11,7 @@ import {
 import {} from "@chakra-ui/icons";
 import { FaYoutube, FaGithub } from "react-icons/fa";
 import { ReactNode } from "react";
+import ScrollToTop from "react-scroll-to-top";
 
 const SocialButton = ({ children, label, href }: any) => {
   return (
@@ -52,7 +53,7 @@ export default function Footer() {
         align={{ base: "center", md: "center" }}
       >
         <b>
-          <Text>Made with 💙 by Team Localhost</Text>
+          <Text>Made with 💙 by Team Localhost at ETHMumbai</Text>
         </b>
 
         <Stack direction={"row"} spacing={6}>
@@ -76,6 +77,20 @@ export default function Footer() {
           </SocialButton>
         </Stack>
       </Container>
+      <ScrollToTop
+        smooth
+        color="#39445a"
+        style={{
+          backgroundColor: "#fff",
+          width: "40px",
+          height: "40px",
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+        }}
+      />
     </Box>
   );
 }
