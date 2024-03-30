@@ -35,7 +35,7 @@ import { useToast } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 // @ts-ignore
 import { ethers } from "ethers";
-import NftAbi from "../../utils/Nft.json";
+import NftAbi from "../../utils/NFT.json";
 
 const UploadArt = () => {
   const toast = useToast();
