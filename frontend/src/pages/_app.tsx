@@ -1,10 +1,11 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
 
 import WagmiProvider from "../utils/wagmiprovider";
 import Head from "next/head";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const colors = {
