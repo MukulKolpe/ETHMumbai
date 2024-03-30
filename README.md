@@ -5,6 +5,8 @@ LoanManager.sol :-
 NFT.sol :-
 0xa672510ccDdBa29202559b88840Bc04629B79c95
 
+OnChainVerifier.sol :- 0xf702449AD852Bf44A5BAc29a426c40641De5A193
+
 Subgraph studio link : -
 
 ```
