@@ -58,14 +58,14 @@ const CreateLoanForm = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      "0x9D384c534ddDBA0574941004778b36dEa6B619e7",
+      "0xa672510ccDdBa29202559b88840Bc04629B79c95",
       NFTAbi,
       signer
     );
 
     const tx = await contract.transferFrom(
       signer.getAddress(),
-      "0xA6Fa7cE717b478FcC2A7A68d48DD8509A8095AE1",
+      "0xBBeD959419253B1f1967141Ab6483b1472703476",
       nftId
     );
     await tx.wait();
@@ -83,7 +83,7 @@ const CreateLoanForm = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      "0xA6Fa7cE717b478FcC2A7A68d48DD8509A8095AE1",
+      "0xBBeD959419253B1f1967141Ab6483b1472703476",
       LoanManagerAbi,
       signer
     );

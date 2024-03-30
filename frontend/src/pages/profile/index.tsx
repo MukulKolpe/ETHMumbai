@@ -95,11 +95,11 @@ const Profile = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contractInstance = new ethers.Contract(
-      "0xA6Fa7cE717b478FcC2A7A68d48DD8509A8095AE1",
+      "0xBBeD959419253B1f1967141Ab6483b1472703476",
       loadnmanagerabi,
       signer
     );
-    const nftContractAddress = "0x9D384c534ddDBA0574941004778b36dEa6B619e7";
+    const nftContractAddress = "0xa672510ccDdBa29202559b88840Bc04629B79c95";
     console.log(contractInstance);
     const res = await contractInstance.getBorrowerLoans();
     console.log(res);
