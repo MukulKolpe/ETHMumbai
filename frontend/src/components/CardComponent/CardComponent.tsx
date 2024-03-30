@@ -351,7 +351,13 @@ const CardComponent = ({ address }) => {
           rounded={"md"}
           overflow={"hidden"}
         >
-          <Image h={"120px"} w={"full"} src={imageURI} objectFit={"cover"} />
+          <Image
+            h={"120px"}
+            w={"full"}
+            src={imageURI}
+            objectFit={"cover"}
+            fallbackSrc={"https://placehold.jp/500x150.png?text=Fetching..."}
+          />
 
           <Box p={6}>
             <Stack spacing={0} align={"center"} mb={5}>
