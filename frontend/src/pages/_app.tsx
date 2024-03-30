@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "@/utils/apollo/client";
 const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
 
 import WagmiProvider from "../utils/wagmiprovider";
@@ -41,7 +43,9 @@ export default function App({ Component, pageProps }: AppProps) {
           }}
         >
           <Navbar />
-          <Component {...pageProps} />
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
           <Footer />
         </div>
       </ChakraProvider>
