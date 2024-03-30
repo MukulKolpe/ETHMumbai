@@ -5,6 +5,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import WagmiProvider from "../utils/wagmiprovider";
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const colors = {
   brand: {
@@ -40,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <Navbar />
           <Component {...pageProps} />
+          <Footer />
         </div>
       </ChakraProvider>
     </WagmiProvider>
