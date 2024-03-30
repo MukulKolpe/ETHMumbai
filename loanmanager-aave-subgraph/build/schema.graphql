@@ -1,0 +1,17 @@
+type ActiveLoansSet @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  status: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanCreated @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  loanContract: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
