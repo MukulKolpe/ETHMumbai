@@ -71,7 +71,7 @@ export default function Navbar() {
                   width={94}
                   height={150}
                 /> */}
-              ETHMumbai
+              AaveAnonify
             </Link>
           </HStack>
           <Flex alignItems={"center"}>
