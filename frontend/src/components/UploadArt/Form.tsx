@@ -93,7 +93,7 @@ const UploadArt = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-      "0x3b47042A391e5ab3722dD8eD5647c072cC05a40f",
+      "0x9D384c534ddDBA0574941004778b36dEa6B619e7",
       NftAbi,
       signer
     );
